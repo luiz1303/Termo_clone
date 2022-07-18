@@ -7,7 +7,6 @@
     A FAZER:
     - Adicionar Animações
     - Adicionar switch de tema claro/escuro
-    - Desativar tab
     - Percorrer campos com setas direcionais
     
     
@@ -15,6 +14,7 @@
     - Adicionar variedade de palavras
     - Fazer a leitura de arquivo
     - Corrigir case sensitive
+    - Desativar tab
     
 
     To read Local file with fetch:
@@ -23,18 +23,26 @@
 */
 
 
-let unknown_word = "AREIA"; //Palavra de teste
-
+const color_switch_button = document.getElementsByClassName('theme-switch');
+document.documentElement.classList.add('dark');
+let unknown_word = "";
 const attempts = document.getElementsByClassName("word");
 let current_attempt = 0;
+
 
 loadDataFile();
 resetGame();
 
-// document.body.addEventListener('click', () => {
-//     attempts[current_attempt-1][0].focus();
-// });
+    
+function colorSwitch () {
 
+    if (document.documentElement.classList.contains('light')) {
+        document.documentElement.classList.remove('light');
+    }
+    else {
+        document.documentElement.classList.add('light');
+    }
+}
 
 //Lê o arquivo com a base de palavras
 function loadDataFile() {
@@ -98,7 +106,7 @@ function deleteItem (current) {
 
 function inputKeyTest(current, event) {
     
-    console.log(event); 
+    // console.log(event); 
 
     const letters = /[A-Za-z]/;
 
