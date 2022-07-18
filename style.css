@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
+:root {
+    --lightWhite: #F5F5F5;
+    --lightBlue: #44445F;
+    --darkBlue: #29293A;
+    --lightGray: #8989A4;
+    --green: #61D06C;
+    --orange: #F59F61;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /* background-color: var(--lightBlue); */
+    background-color: var(--lightWhite);
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.word {
+    display: flex;
+}
+
+.letter-input {
+    cursor: pointer;
+    background-color: transparent;
+    height: 60px;
+    width: 60px;
+    border-radius: 12px;
+    border: 4px solid var(--darkBlue);
+
+    /* color: white; */
+    color: var(--darkBlue);
+    font-size: 2.2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 2px;
+}
+
+.letter-input:focus {
+    outline: none;
+    border: 6px solid var(--darkBlue);
+    background-color: rgba(1, 1, 1, 0.1);
+
+    /*Esconde o cursor de digitação*/
+    caret-color: transparent;
+}
+
+
+h2 { /*Título do jogo*/
+    color: white;
+    font-weight: 900;
+    text-align: center;
+    width: 120px;
+    border-radius: 10px;
+    margin: 2rem auto 2rem auto;
+    cursor: default;
+    user-select: none;
+    background-color: var(--darkBlue);
+    opacity: 0.8;
+}
+
+.correct-letter {
+    background-color: var(--green);
+    border: none;
+    pointer-events: none;
+}
+
+.almost-correct-letter {
+    background-color: var(--orange);
+    border: none;
+    pointer-events: none;
+}
+
+.incorrect-letter {
+    background-color: var(--darkBlue);
+    color: white;
+    border: none;
+    pointer-events: none;
+}
+
+.idle {
+    background-color: var(--darkBlue);
+    pointer-events: none;
+    border: none;
+}
+
