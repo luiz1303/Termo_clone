@@ -3,18 +3,25 @@
     Jogo Original:
     https://term.ooo/ 
 
+
+    https://venngage.com/blog/blue-color-palettes/
     
+
     A FAZER:
-    - Adicionar Animações
-    - Adicionar switch de tema claro/escuro
-    - Percorrer campos com setas direcionais
+
+    - Teclado com letras
     
     
     FEITO:
+    - Popup de vitória/derrota
     - Adicionar variedade de palavras
     - Fazer a leitura de arquivo
     - Corrigir case sensitive
-    - Desativar tab
+    - Impedir tabbing
+    - Adicionar Animações
+    - Adicionar switch de tema claro/escuro
+    - Percorrer campos com setas direcionais
+    - Corrigir erro de perder na última linha
     
 
     To read Local file with fetch:
@@ -23,18 +30,19 @@
 */
 
 
-const color_switch_button = document.getElementsByClassName('theme-switch');
-document.documentElement.classList.add('dark');
 let unknown_word = "";
 const attempts = document.getElementsByClassName("word");
 let current_attempt = 0;
 
-
 loadDataFile();
 resetGame();
 
-    
-function colorSwitch () {
+
+const color_switch = document.getElementById("check");
+document.documentElement.classList.add('dark');
+
+
+color_switch.addEventListener('change', () => {
 
     if (document.documentElement.classList.contains('light')) {
         document.documentElement.classList.remove('light');
@@ -42,7 +50,8 @@ function colorSwitch () {
     else {
         document.documentElement.classList.add('light');
     }
-}
+});
+
 
 //Lê o arquivo com a base de palavras
 function loadDataFile() {
@@ -77,10 +86,29 @@ function getWord(data) {
     console.log(unknown_word);
 }
 
-
-
-
-
+function finalScreen (win) {
+    const menuPop = document.getElementById("menu");
+    const msg = document.getElementById('msg');
+    const icon = document.getElementById('icon');
+    const button = document.getElementById('btn');
+    
+    menuPop.style.visibility = "visible";
+    
+    if (win) {
+        icon.classList.remove("fa-heart-crack");
+        icon.classList.add("fa-circle-check");
+        icon.style.color = '#61D06C';
+        msg.innerText = "Você acertou! A palavra era:\n" + unknown_word + ".";
+        button.focus();
+    }
+    else {
+        icon.classList.remove("fa-circle-check");
+        icon.classList.add("fa-heart-crack");
+        icon.style.color = '#f13a37';
+        msg.innerText = "Você perdeu! A palavra era:\n" + unknown_word + ".";
+        button.focus();
+    }
+}
 
 
 /*Autotab no input de letras do usuário */
@@ -97,16 +125,22 @@ function deleteItem (current) {
 
     const previous = current.previousElementSibling;
     
-    if (previous && current.value.length == 0) {
+    if (current.value.length == 1) {
+        // Evita problemas caso o cursor se posicione antes do texto!
+        current.value = "";
+    }
+    else if (previous && current.value.length == 0) {
         previous.focus();
     }
-
 }
 
 
 function inputKeyTest(current, event) {
     
     // console.log(event); 
+
+    const next = current.nextElementSibling;
+    const previous = current.previousElementSibling;
 
     const letters = /[A-Za-z]/;
 
@@ -115,6 +149,12 @@ function inputKeyTest(current, event) {
     }
     else if (event.keyCode == 13) { //Enter
         submitWord(current.parentElement);
+    }
+    else if (event.keyCode == 37 && previous) { //seta esquerda
+        previous.focus();   
+    }
+    else if (event.keyCode == 39 && next) { //seta direita
+        next.focus();
     }
     else if (event.key.match(letters)) { //Letra válida
         return true; 
@@ -141,7 +181,6 @@ function submitWord(word) {
     }
     else {
         checkWord(word); //Confere as letras inseridas
-        setActiveAttempt(); //Avança para a nova tentativa
     }
 
 }
@@ -165,9 +204,11 @@ function checkWord(word) {
     }
 
     if (correct_letter_count == word.length) {
-        alert("Você acertou a palavra!");
-        document. location. reload();
-        // resetGame();
+        // alert("Você acertou a palavra!");
+        finalScreen(true);
+    }
+    else {
+        setActiveAttempt(); //Avança para a nova tentativa
     }
 }
 
@@ -177,9 +218,8 @@ function setActiveAttempt() {
     // console.log(current_attempt);
 
     if (current_attempt > attempts.length) {
-        alert("Você perdeu! A palavra era: " + unknown_word);
-        document. location. reload();
-        // resetGame();
+        finalScreen(false);
+        // alert("Você perdeu! A palavra era: " + unknown_word);
     }
     else {
         for (letter of attempts[current_attempt-1]) {

@@ -10,10 +10,24 @@
     <title>Termo</title>
 </head>
 <body>
+    <div class="popup" id="menu">
+        <div class="message">
+            <i id="icon" class="icone fa-solid fa-heart-crack"></i>
+            <div class="msg-text" id = "msg">mensagem</div>
+            <button id="btn" class="restart-btn" onclick="document.location.reload()">Recomeçar</button>
+        </div>
+    </div>
+    
     <header>
         <h2>TERMO</h2>
-        <button class="theme-switch" onclick="colorSwitch()">Dark</button>
+        <input type="checkbox" class="switch-checkbox" id="check"/>
+        <label class="label" for="check">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <div class="circle"></div>
+        </label>
     </header>
+
     <main>
         <div>
             <form class="word">
