@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a60ef87bb8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css"/>
+    <script src="./file_read.js" defer></script>
+    <script src="./final_screen.js" defer></script>
     <script src="./script.js" defer></script>
+    <script src="./color_switch.js" defer></script>
     <title>Termo</title>
 </head>
 <body>
@@ -74,5 +77,44 @@
             </form>
         </div>
     </main>
+
+    <div class="keyboard">
+        <div class="keyboard-line">
+            <button id="Q-key" class="key" onclick="keypress(this)">Q</button>
+            <button id="W-key" class="key" onclick="keypress(this)">W</button>
+            <button id="E-key" class="key" onclick="keypress(this)">E</button>
+            <button id="R-key" class="key" onclick="keypress(this)">R</button>
+            <button id="T-key" class="key" onclick="keypress(this)">T</button>
+            <button id="Y-key" class="key" onclick="keypress(this)">Y</button>
+            <button id="U-key" class="key" onclick="keypress(this)">U</button>
+            <button id="I-key" class="key" onclick="keypress(this)">I</button>
+            <button id="O-key" class="key" onclick="keypress(this)">O</button>
+            <button id="P-key" class="key" onclick="keypress(this)">P</button>
+        </div>
+
+        <div class="keyboard-line">
+            <button id="A-key"   class="key" onclick="keypress(this)">A</button>
+            <button id="S-key"   class="key" onclick="keypress(this)">S</button>
+            <button id="D-key"   class="key" onclick="keypress(this)">D</button>
+            <button id="F-key"   class="key" onclick="keypress(this)">F</button>
+            <button id="G-key"   class="key" onclick="keypress(this)">G</button>
+            <button id="H-key"   class="key" onclick="keypress(this)">H</button>
+            <button id="J-key"   class="key" onclick="keypress(this)">J</button>
+            <button id="K-key"   class="key" onclick="keypress(this)">K</button>
+            <button id="L-key"   class="key" onclick="keypress(this)">L</button>
+            <button id="Del-key" class="key" onclick="keypress(this)">Del</button>
+        </div>
+
+        <div class="keyboard-line">
+            <button id="Z-key"     class="key" onclick="keypress(this)">Z</button>
+            <button id="X-key"     class="key" onclick="keypress(this)">X</button>
+            <button id="C-key"     class="key" onclick="keypress(this)">C</button>
+            <button id="V-key"     class="key" onclick="keypress(this)">V</button>
+            <button id="B-key"     class="key" onclick="keypress(this)">B</button>
+            <button id="N-key"     class="key" onclick="keypress(this)">N</button>
+            <button id="M-key"     class="key" onclick="keypress(this)">M</button>
+            <button id="Enter-key" class="key" onclick="keypress(this)">Enter</button>
+        </div>
+    </div>
 </body>
 </html>

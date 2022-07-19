@@ -1,18 +1,10 @@
 /*
-
-    Jogo Original:
-    https://term.ooo/ 
-
-
-    https://venngage.com/blog/blue-color-palettes/
-    
-
     A FAZER:
 
-    - Teclado com letras
     
     
     FEITO:
+    - Teclado com letras
     - Popup de vitória/derrota
     - Adicionar variedade de palavras
     - Fazer a leitura de arquivo
@@ -33,82 +25,41 @@
 let unknown_word = "";
 const attempts = document.getElementsByClassName("word");
 let current_attempt = 0;
+let active_element;
 
 loadDataFile();
 resetGame();
 
 
-const color_switch = document.getElementById("check");
-document.documentElement.classList.add('dark');
 
 
-color_switch.addEventListener('change', () => {
-
-    if (document.documentElement.classList.contains('light')) {
-        document.documentElement.classList.remove('light');
+//Controle do Teclado Virtual
+function keypress(key){
+    console.log(key);
+    if (key.id == "Enter-key") {
+        console.log("é o enter");
+        submitWord(active_element.parentElement);
+    }
+    else if (key.id == "Del-key") {
+        deleteItem(active_element);
     }
     else {
-        document.documentElement.classList.add('light');
+        active_element.value = key.innerText;
+        autotab(active_element);
+    }
+}
+
+
+//Mantém o campo de preenchimento ativo mesmo que o usuário clique fora!
+document.addEventListener('click', (element) => {
+
+    if (element.path[0].classList.contains('letter-input')) {
+        active_element = element.path[0];
+    }
+    else {
+        active_element.focus();
     }
 });
-
-
-//Lê o arquivo com a base de palavras
-function loadDataFile() {
-    const fetchRes = fetch('./word_list.dat');
-
-    fetchRes.then(response => response.text()).then(data => {
-        // console.log(data);
-        getWord(data);
-    });
-}
-
-
-function getWord(data) {
-    let wordPicker = [""];
-    let i = 0;
-
-    for(element of data) { //Separa as palavras
-
-        if (element.toUpperCase() >= 'A' && element.toUpperCase() <= 'Z'){ 
-            //Concatena as letras numa string do array de palavras
-            wordPicker[i] = wordPicker[i] + element; 
-        }
-        else if (element == '\n'){
-            i++;
-            wordPicker[i] = "";
-        }
-    }
-
-    //Seleciona aleatóriamente uma das palavras
-    let randomPos = Math.floor(Math.random() * wordPicker.length);
-    unknown_word = wordPicker[randomPos].toUpperCase();
-    console.log(unknown_word);
-}
-
-function finalScreen (win) {
-    const menuPop = document.getElementById("menu");
-    const msg = document.getElementById('msg');
-    const icon = document.getElementById('icon');
-    const button = document.getElementById('btn');
-    
-    menuPop.style.visibility = "visible";
-    
-    if (win) {
-        icon.classList.remove("fa-heart-crack");
-        icon.classList.add("fa-circle-check");
-        icon.style.color = '#61D06C';
-        msg.innerText = "Você acertou! A palavra era:\n" + unknown_word + ".";
-        button.focus();
-    }
-    else {
-        icon.classList.remove("fa-circle-check");
-        icon.classList.add("fa-heart-crack");
-        icon.style.color = '#f13a37';
-        msg.innerText = "Você perdeu! A palavra era:\n" + unknown_word + ".";
-        button.focus();
-    }
-}
 
 
 /*Autotab no input de letras do usuário */
@@ -118,26 +69,31 @@ function autotab(current) {
     //Se existir um próximo elemento e se o atual tiver seu tamanho máximo, foca no próximo
     if (next && current.value.length == current.getAttribute('maxlength')) {
         next.focus();
+        active_element = next;
     }
 }
 
+
+
+/*Função de delete para apagar as letras de cada input */
 function deleteItem (current) {
 
     const previous = current.previousElementSibling;
     
     if (current.value.length == 1) {
-        // Evita problemas caso o cursor se posicione antes do texto!
-        current.value = "";
+
+        current.value = ""; // Evita problemas caso o cursor se posicione antes do texto!
     }
     else if (previous && current.value.length == 0) {
         previous.focus();
+        previous.value = "";
+        active_element = previous;
     }
 }
 
 
+//Confere qual tecla foi pressionada pelo usuário
 function inputKeyTest(current, event) {
-    
-    // console.log(event); 
 
     const next = current.nextElementSibling;
     const previous = current.previousElementSibling;
@@ -145,16 +101,18 @@ function inputKeyTest(current, event) {
     const letters = /[A-Za-z]/;
 
     if (event.keyCode == 8){ //Backspace
-        deleteItem(current, event);
+        deleteItem(current);
     }
     else if (event.keyCode == 13) { //Enter
         submitWord(current.parentElement);
     }
     else if (event.keyCode == 37 && previous) { //seta esquerda
-        previous.focus();   
+        previous.focus();
+        active_element = previous;   
     }
     else if (event.keyCode == 39 && next) { //seta direita
         next.focus();
+        active_element = next;   
     }
     else if (event.key.match(letters)) { //Letra válida
         return true; 
@@ -212,6 +170,7 @@ function checkWord(word) {
     }
 }
 
+
 function setActiveAttempt() {
     
     current_attempt++;
@@ -228,8 +187,10 @@ function setActiveAttempt() {
 
         //Seleciona o primeiro item da próxima palavra
         attempts[current_attempt-1][0].focus();
+        active_element = attempts[current_attempt-1][0];
     }
 }
+
 
 function resetGame (){
 
@@ -244,5 +205,6 @@ function resetGame (){
         }
     }
     current_attempt = 0;
+    active_element = attempts[0][0];
     setActiveAttempt();
 }

@@ -10,7 +10,7 @@
     --lightBlue: #44445F;
     --darkBlue: #29293A;
     --green: #61D06C;
-    --orange: #F59F61;
+    --orange: #ffca58;
 }
 
 :root.dark {
@@ -72,8 +72,6 @@ main {
     outline: none;
     border: 6px solid var(--main-color);
     background-color: rgba(1, 1, 1, 0.15);
-    height: 62px;
-    width: 62px;
 
     /*Esconde o cursor de digitação*/
     caret-color: transparent;
@@ -81,7 +79,7 @@ main {
 
 header {
     display: flex;
-    margin: 0 1rem 4rem 1rem;
+    margin: 0 1rem 1rem 1rem;
     justify-content: right;
     align-items: center;
     height: 70px;
@@ -144,14 +142,14 @@ h2 { /*Título*/
     font-weight: 800;
     height: 50px;
     width: 120px;
-    border-radius: 25px;
+    border-radius: 30px;
     font-size: 1.5rem;
     
     display: flex;
     justify-content: center;
     align-items: center;
     
-    margin: 5rem auto 0 auto;
+    margin: 1rem auto 0 auto;
     cursor: pointer;
     user-select: none;
     background-color: var(--input-color);
@@ -180,6 +178,12 @@ h2:active{
     pointer-events: none;
 }
 
+.correct-letter:focus {
+    outline: none;
+    border: none;
+    background-color: var(--green);
+}
+
 .almost-correct-letter {
     color: var(--lightWhite);
     background-color: var(--orange);
@@ -199,6 +203,11 @@ h2:active{
     pointer-events: none;
     border: none;
 }
+
+
+
+
+/* ====================  PopUp Screen CSS ====================== */
 
 .popup {
     position: absolute;
@@ -223,7 +232,7 @@ h2:active{
 }
 
 .message {
-    margin: 0;
+    margin: 0 0 4rem 0;
     position:absolute;
     display: flex;
     align-items: center;
@@ -265,3 +274,61 @@ h2:active{
     background-color: #33334e;
     cursor: pointer;
 }
+
+
+
+
+
+
+/* ====================  Keyboard CSS  ====================== */
+
+.keyboard {
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.keyboard-line {
+    display: flex;
+    justify-content: center;
+}
+
+.key {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--lightWhite);
+    background-color: #66669c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+
+    border-radius: 5px;
+    margin: 3px;
+    width: 52px;
+    height: 52px;
+}
+
+.key:hover {
+    background-color: #8686c9;
+    cursor: pointer;
+    font-size: 1.3rem;
+    transition: all 0.1s;
+}
+
+.key:active {
+    background-color: #545483;
+    font-size: 1.1rem;
+    transition: all 0.05s;
+}
+
+#Enter-key {
+    width: 120px;
+}
+
+
+#Del-key {
+    width: 72px;
+}
+/* ========================================== */
