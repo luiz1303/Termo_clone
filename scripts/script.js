@@ -1,43 +1,14 @@
-/*
-    A FAZER:
-
-    
-    
-    FEITO:
-    - Teclado com letras
-    - Popup de vitória/derrota
-    - Adicionar variedade de palavras
-    - Fazer a leitura de arquivo
-    - Corrigir case sensitive
-    - Impedir tabbing
-    - Adicionar Animações
-    - Adicionar switch de tema claro/escuro
-    - Percorrer campos com setas direcionais
-    - Corrigir erro de perder na última linha
-    
-
-    To read Local file with fetch:
-    https://www.geeksforgeeks.org/javascript-fetch-method/
-
-*/
-
-
 let unknown_word = "";
 const attempts = document.getElementsByClassName("word");
 let current_attempt = 0;
 let active_element;
 
-loadDataFile();
 resetGame();
-
-
-
+getWord();
 
 //Controle do Teclado Virtual
 function keypress(key){
-    console.log(key);
     if (key.id == "Enter-key") {
-        console.log("é o enter");
         submitWord(active_element.parentElement);
     }
     else if (key.id == "Del-key") {

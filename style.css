@@ -5,6 +5,7 @@
     box-sizing: border-box;
 }
 
+
 :root {
     --lightWhite: #F5F5F5;
     --lightBlue: #44445F;
@@ -31,7 +32,7 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
 
-    transition: all 0.4s;
+    transition: none;
 }
 
 main {
@@ -58,11 +59,10 @@ main {
     text-transform: uppercase;
     text-align: center;
     margin: 3px;
-    transition: all 0.3s;
+    transition: width 0.3s, height 0.3s, border 0.2s, margin 0.4s;
 }
 
 .letter-input:hover {
-    transition: all 0.1s;
     border: 5px solid var(--main-color);
     height: 65px;
     width: 65px;
@@ -108,7 +108,7 @@ header {
     
     /*Fator de redimensionamento*/
     transform: scale(1.3);
-    transition: all 0.2s;
+    transition: transform 0.2s;
 }
 
 .label .circle {
@@ -153,7 +153,7 @@ h2 { /*Título*/
     cursor: pointer;
     user-select: none;
     background-color: var(--input-color);
-    transition: all 0.35s;
+    transition: width 0.35s, height 0.35s, letter-spacing 0.35s, font-size 0.35s, font-weight 0.35s, background-color 0.35s;
 }
 
 h2:hover {
@@ -220,8 +220,8 @@ h2:active{
     justify-content: center;
     align-items: center;
 
-    transition: all 0.1s;
     visibility: hidden;
+    transition: none;
 }
 
 .popup i {
@@ -261,10 +261,11 @@ h2:active{
     background-color: #44445F;
     border: none;
     transform: translateY(4rem);
-    transition: all 0.2s;
+    transition: none;
 }
 
 .restart-btn:hover {
+    transition: all 0.2s;
     background-color: #585887;
     cursor: pointer;
     transform: translateY(4rem) scale(1.05);

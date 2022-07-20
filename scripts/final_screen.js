@@ -4,6 +4,7 @@ function finalScreen (win) {
     const icon = document.getElementById('icon');
     const button = document.getElementById('btn');
     
+    menuPop.style.transition = "all 0.1s";
     menuPop.style.visibility = "visible";
     
     if (win) {
